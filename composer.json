@@ -23,7 +23,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Creode\\LaravelNovaBlog\\LaravelNovaAssetsServiceProvider"
+                "Creode\\LaravelNovaBlog\\Providers\\BlogServiceProvider",
+                "Creode\\LaravelNovaBlog\\Providers\\BlogNovaServiceProvider"
             ],
             "aliases": {
             }
@@ -31,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Creode\\LaravelNovaBlog\\": "src/",
+            "Creode\\LaravelNovaBlog\\": "/src",
             "Creode\\LaravelNovaBlog\\Database\\Factories\\": "database/factories/"
         }
     }
