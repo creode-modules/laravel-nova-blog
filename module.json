@@ -1,0 +1,12 @@
+{
+    "name": "Blog",
+    "alias": "blog",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Creode\\LaravelNovaBlog\\Providers\\BlogServiceProvider",
+        "Creode\\LaravelNovaBlog\\Providers\\BlogNovaServiceProvider"
+    ],
+    "files": []
+}
