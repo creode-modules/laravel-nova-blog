@@ -1,0 +1,38 @@
+{
+    "name": "creode/laravel-nova-blog",
+    "description": "This package allows you to add a blog to your Laravel Nova admin panel.",
+    "authors": [
+        {
+            "name": "Creode",
+            "email": "contact@creode.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/creode-modules/laravel-nova-blog",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
+    "require": {
+        "whitecube/nova-flexible-content": "^1.0",
+        "spatie/laravel-markdown": "^2.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Creode\\LaravelNovaBlog\\LaravelNovaAssetsServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Creode\\LaravelNovaBlog\\": "src/",
+            "Creode\\LaravelNovaBlog\\Database\\Factories\\": "database/factories/"
+        }
+    }
+}
