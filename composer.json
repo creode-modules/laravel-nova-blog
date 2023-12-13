@@ -1,6 +1,6 @@
 {
     "name": "creode/laravel-nova-blog",
-    "description": "A Laravel Nova tool.",
+    "description": "A simple blog package for Laravel Nova th flexible content and post categories.",
     "keywords": [
         "laravel",
         "nova"
