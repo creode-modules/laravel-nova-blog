@@ -15,7 +15,7 @@ class PostCategory extends Resource
      *
      * @var class-string<\App\Models\User>
      */
-    public static $model = \Modules\Blog\Entities\PostCategory::class;
+    public static $model = \Creode\LaravelNovaBlog\Entities\PostCategory::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -33,7 +33,7 @@ class PostCategory extends Resource
         'id', 'title'
     ];
 
-    public static $group = 'Posts';
+    public static $group = 'Blog';
 
     /**
      * Get the fields displayed by the resource.

@@ -1,56 +1,29 @@
 {
     "name": "creode/laravel-nova-blog",
-    "description": "This package allows you to add a blog to your Laravel Nova admin panel.",
-    "authors": [
-        {
-            "name": "Creode",
-            "email": "contact@creode.co.uk",
-            "role": "Developer"
-        }
+    "description": "A Laravel Nova tool.",
+    "keywords": [
+        "laravel",
+        "nova"
     ],
-    "homepage": "https://github.com/creode-modules/laravel-nova-blog",
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
-        }
-    ],
     "require": {
-        "whitecube/nova-flexible-content": "^1.0",
-        "spatie/laravel-markdown": "^2.0"
+        "php": "^7.3|^8.0"
     },
-    "scripts": {
-        "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-laravel-nova-assets --ansi",
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "build": [
-            "@composer run prepare",
-            "@php vendor/bin/testbench workbench:build --ansi"
-        ],
-        "start": [
-            "Composer\\Config::disableProcessTimeout",
-            "@composer run build",
-            "@php vendor/bin/testbench serve"
-        ],
-        "analyse": "vendor/bin/phpstan analyse",
-        "format": "vendor/bin/pint"
+    "autoload": {
+        "psr-4": {
+            "Creode\\LaravelNovaBlog\\": "src/"
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Creode\\LaravelNovaBlog\\Providers\\BlogServiceProvider",
-                "Creode\\LaravelNovaBlog\\Providers\\BlogNovaServiceProvider"
-            ],
-            "aliases": {
-            }
+                "Creode\\LaravelNovaBlog\\ToolServiceProvider",
+                "Creode\\LaravelNovaBlog\\LaravelNovaBlogServiceProvider"
+            ]
         }
     },
-    "autoload": {
-        "psr-4": {
-            "Creode\\LaravelNovaBlog\\": "/src",
-            "Creode\\LaravelNovaBlog\\Database\\Factories\\": "database/factories/"
-        }
+    "config": {
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true

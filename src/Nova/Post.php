@@ -14,7 +14,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
-use NovaAttachMany\AttachMany;
+//use NovaAttachMany\AttachMany;
 use Outl1ne\NovaTranslatable\HandlesTranslatable;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -25,7 +25,7 @@ class Post extends Resource
      *
      * @var class-string<\App\Models\User>
      */
-    public static $model = \Modules\Blog\Entities\Post::class;
+    public static $model = \Creode\LaravelNovaBlog\Entities\Post::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -43,7 +43,7 @@ class Post extends Resource
         'id', 'title', 'body',
     ];
 
-    public static $group = 'Posts';
+    public static $group = 'Blog';
 
     /**
      * Get the fields displayed by the resource.
@@ -60,7 +60,7 @@ class Post extends Resource
                 ->rules('required', 'max:255')
                 ->translatable(),
             Slug::make('Slug')->from('Title'),
-            Boolean::make('Featured Post','featured_post'),
+            Boolean::make('Featured Post', 'featured_post'),
             Flexible::make('Body')->addLayout('Image and Text', 'ImageAndText', [
                 Image::make('Image', 'image')
                     ->disk('public')
@@ -91,8 +91,8 @@ class Post extends Resource
                 ->prunable(),
             BelongsTo::make('Author', 'author', 'App\Nova\User')
                 ->default(auth()->id()),
-            AttachMany::make('Post Category', 'categories', PostCategory::class),
-            BelongsToMany::make('Post Category', 'categories', 'Modules\Blog\Nova\PostCategory'),
+//            AttachMany::make('Post Category', 'categories', PostCategory::class),
+            BelongsToMany::make('Post Category', 'categories', 'Creode\LaravelNovaBlog\Nova\PostCategory'),
         ];
     }
 
