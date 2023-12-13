@@ -15,8 +15,8 @@ export default defineConfig({
             publicDirectory: '../../public',
             buildDirectory: 'build-blog',
             input: [
-                __dirname + '/Resources/assets/sass/app.scss',
-                __dirname + '/Resources/assets/js/app.js'
+                __dirname + '/resources/css/tool.css',
+                __dirname + 'resources/js/tool.js'
             ],
             refresh: true,
         }),
