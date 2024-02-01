@@ -3,7 +3,6 @@
 namespace Creode\LaravelNovaBlog\Nova;
 
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
@@ -11,11 +10,8 @@ use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
-//use NovaAttachMany\AttachMany;
-use Outl1ne\NovaTranslatable\HandlesTranslatable;
 use Whitecube\NovaFlexibleContent\Flexible;
 
 class Post extends Resource
@@ -91,8 +87,6 @@ class Post extends Resource
                 ->prunable(),
             BelongsTo::make('Author', 'author', 'App\Nova\User')
                 ->default(auth()->id()),
-//            AttachMany::make('Post Category', 'categories', PostCategory::class),
-            BelongsToMany::make('Post Category', 'categories', 'Creode\LaravelNovaBlog\Nova\PostCategory'),
         ];
     }
 
