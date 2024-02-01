@@ -27,7 +27,6 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
     {
         Nova::resources([
             Post::class,
-            PostCategory::class,
         ]);
     }
 
