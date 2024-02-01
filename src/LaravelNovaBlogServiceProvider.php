@@ -33,17 +33,6 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
 
     public function registerComponents()
     {
-
-//        $registerComponentEvent = new RegisterComponentEvent();
-//
-//        trigger($registerComponentEvent);
-//
-//        foreach ($registerComponentEvent->components as $component) {
-//            Blade::anonymousComponentPath(module_path($component->name, $component->path));
-//        }
-
-        //Blade::anonymousComponentPath(module_path('Blog', '/Resources/views/components'));
-
         Blade::components([
             'ImageAndText' => ImageAndText::class,
             'ImagesSideBySide' => ImagesSideBySide::class,
@@ -66,6 +55,8 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
                     '2023_08_10_134620_add_slug_field_to_post_categories_table',
                     '2023_08_10_152446_add_featured_post_field_to_posts_table',
                     '2023_08_10_160255_add_featured_image_field_to_posts_table',
+                    '2024_02_01_164655_remove_post_categories_tables',
+                    '2024_02_01_165253_remove_post_post_categories_table',
                 ]
             )
             ->runsMigrations();
