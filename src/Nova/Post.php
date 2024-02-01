@@ -2,6 +2,7 @@
 
 namespace Creode\LaravelNovaBlog\Nova;
 
+use Creode\NovaPageBuilder\Nova\Fields\PageBuilder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
@@ -56,30 +57,11 @@ class Post extends Resource
                 ->rules('required', 'max:255')
                 ->translatable(),
             Slug::make('Slug')->from('Title'),
+            Text::make('Meta Description')
+                ->required()
+                ->exclude(config('nova-blog.excluded_blocks')),
             Boolean::make('Featured Post', 'featured_post'),
-            Flexible::make('Body')->addLayout('Image and Text', 'ImageAndText', [
-                Image::make('Image', 'image')
-                    ->disk('public')
-                    ->path('blog')
-                    ->prunable(),
-                Markdown::make('Text', 'Text')
-                    ->translatable(),
-            ])
-            ->addLayout('Text', 'text', [
-                Markdown::make('Text', 'text')
-                    ->translatable(),
-            ])
-            ->addLayout('Images Side by Side', 'ImagesSideBySide', [
-                Image::make('Left Image', 'left_image')
-                    ->disk('public')
-                    ->path('blog')
-                    ->prunable(),
-                Image::make('Right Image', 'right_image')
-                    ->disk('public')
-                    ->path('blog')
-                    ->prunable(),
-            ])
-            ->button('Add Content'),
+            PageBuilder::make('Body'),
             Textarea::make('Excerpt'),
             Image::make('Featured Image', 'featured_image')
                 ->disk('public')

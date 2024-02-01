@@ -25,6 +25,7 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
 
     public function registerResources()
     {
+        Post::$model = config('nova-blog.post_model', \Creode\LaravelNovaBlog\Entities\Post::class);
         Nova::resources([
             Post::class,
         ]);
@@ -45,6 +46,7 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
             ->name('laravel-nova-blog')
             ->hasViews()
             ->hasRoutes('web')
+            ->hasConfigFile()
             ->hasMigrations(
                 [
                     '2023_08_07_122000_create_post_categories_table',
