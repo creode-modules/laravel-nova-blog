@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::drop('post_post_categories');
+        Schema::drop('post_post_category');
     }
 
     /**

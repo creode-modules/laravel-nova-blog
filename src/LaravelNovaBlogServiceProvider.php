@@ -56,8 +56,9 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
                     '2023_08_10_134620_add_slug_field_to_post_categories_table',
                     '2023_08_10_152446_add_featured_post_field_to_posts_table',
                     '2023_08_10_160255_add_featured_image_field_to_posts_table',
+                    '2024_02_01_164553_remove_post_post_categories_table',
                     '2024_02_01_164655_remove_post_categories_tables',
-                    '2024_02_01_165253_remove_post_post_categories_table',
+                    '2024_02_02_150337_remove_author_field',
                 ]
             )
             ->runsMigrations();

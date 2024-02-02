@@ -52,23 +52,31 @@ class Post extends Resource
     {
         return [
             ID::make()->sortable(),
+
             Text::make('Title')
                 ->sortable()
-                ->rules('required', 'max:255')
-                ->translatable(),
-            Slug::make('Slug')->from('Title'),
+                ->rules('required', 'max:255'),
+
+            Slug::make('Slug')
+                ->from('Title')
+                ->help(__('The url that will be used for the post')),
+
             Text::make('Meta Description')
                 ->required()
+                ->help(__('The meta description for the post. This will be used in search engine results.')),
+
+            Boolean::make('Featured Post', 'featured_post')
+                ->help(__('Determines if the post is featured on the listing page')),
+
+            PageBuilder::make('Body')
                 ->exclude(config('nova-blog.excluded_blocks')),
-            Boolean::make('Featured Post', 'featured_post'),
-            PageBuilder::make('Body'),
+
             Textarea::make('Excerpt'),
+
             Image::make('Featured Image', 'featured_image')
                 ->disk('public')
                 ->path('blog')
                 ->prunable(),
-            BelongsTo::make('Author', 'author', 'App\Nova\User')
-                ->default(auth()->id()),
         ];
     }
 
