@@ -1,6 +1,6 @@
 <?php
 
-namespace Creode\LaravelNovaBlog\Database\Seeders;
+namespace Creode\LaravelNovaBlog\database\seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;

@@ -1,0 +1,28 @@
+preset: package
+
+namespace: Creode\LaravelNovaBlog
+user-auth-model: App\Models\User
+
+paths:
+  src: src
+  resource: resources
+
+factory:
+  path: database/factories
+
+migration:
+  path: database/migrations
+  prefix: ''
+
+console:
+  namespace: Creode\LaravelNovaBlog\Console
+
+model:
+  namespace: Creode\LaravelNovaBlog\Entities
+  path: src/Entities
+
+provider:
+  namespace: Creode\LaravelNovaBlog\Providers
+
+testing:
+  namespace: Creode\LaravelNovaBlog\Tests

@@ -2,21 +2,18 @@
 
 namespace Creode\LaravelNovaBlog\Nova;
 
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Resource;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Trix;
+use Creode\NovaPublishable\Published;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Resource;
-//use NovaAttachMany\AttachMany;
-use Outl1ne\NovaTranslatable\HandlesTranslatable;
-use Whitecube\NovaFlexibleContent\Flexible;
+use Creode\NovaPublishable\Nova\PublishAction;
+use Creode\NovaPublishable\Nova\UnpublishAction;
+use Creode\NovaPageBuilder\Nova\Fields\PageBuilder;
 
 class Post extends Resource
 {
@@ -55,44 +52,33 @@ class Post extends Resource
     {
         return [
             ID::make()->sortable(),
+
+            Published::make('Published', 'published_at'),
+
             Text::make('Title')
                 ->sortable()
-                ->rules('required', 'max:255')
-                ->translatable(),
-            Slug::make('Slug')->from('Title'),
-            Boolean::make('Featured Post', 'featured_post'),
-            Flexible::make('Body')->addLayout('Image and Text', 'ImageAndText', [
-                Image::make('Image', 'image')
-                    ->disk('public')
-                    ->path('blog')
-                    ->prunable(),
-                Markdown::make('Text', 'Text')
-                    ->translatable(),
-            ])
-            ->addLayout('Text', 'text', [
-                Markdown::make('Text', 'text')
-                    ->translatable(),
-            ])
-            ->addLayout('Images Side by Side', 'ImagesSideBySide', [
-                Image::make('Left Image', 'left_image')
-                    ->disk('public')
-                    ->path('blog')
-                    ->prunable(),
-                Image::make('Right Image', 'right_image')
-                    ->disk('public')
-                    ->path('blog')
-                    ->prunable(),
-            ])
-            ->button('Add Content'),
+                ->rules('required', 'max:255'),
+
+            Slug::make('Slug')
+                ->from('Title')
+                ->help(__('The url that will be used for the post')),
+
+            Text::make('Meta Description')
+                ->required()
+                ->help(__('The meta description for the post. This will be used in search engine results.')),
+
+            Boolean::make('Featured Post', 'featured_post')
+                ->help(__('Determines if the post is featured on the listing page')),
+
+            PageBuilder::make('Body')
+                ->exclude(config('nova-blog.excluded_blocks')),
+
             Textarea::make('Excerpt'),
+
             Image::make('Featured Image', 'featured_image')
-                ->disk('public')
+                ->disk(config('nova-blog.image_disk', 'public'))
                 ->path('blog')
                 ->prunable(),
-            BelongsTo::make('Author', 'author', 'App\Nova\User')
-                ->default(auth()->id()),
-//            AttachMany::make('Post Category', 'categories', PostCategory::class),
-            BelongsToMany::make('Post Category', 'categories', 'Creode\LaravelNovaBlog\Nova\PostCategory'),
         ];
     }
 
@@ -137,6 +123,16 @@ class Post extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new PublishAction)
+                ->confirmText('Are you sure you want to publish these items?')
+                ->confirmButtonText('Publish')
+                ->cancelButtonText("Don't Publish"),
+
+            (new UnpublishAction)
+                ->confirmText('Are you sure you want to unpublish these items?')
+                ->confirmButtonText('Unpublish')
+                ->cancelButtonText("Don't Unpublish")
+        ];
     }
 }

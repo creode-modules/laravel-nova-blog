@@ -2,27 +2,34 @@
 
 namespace Creode\LaravelNovaBlog\Entities;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use \Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
+use PawelMysior\Publishable\Publishable;
 use Spatie\Translatable\HasTranslations;
+use Creode\NovaPageBuilder\Traits\HasComponents;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 
 class Post extends Model
 {
-    use HasFlexible, HasTranslations;
-    protected $fillable = [];
+    use HasFlexible, HasTranslations, Publishable, HasComponents;
+
+    protected $componentField = 'body';
+
+    protected $casts = [
+        'body' => FlexibleCast::class,
+    ];
 
     public $translatable = ['title'];
 
-    public function author(): BelongsTo
+    public function featuredImageUrl(): Attribute
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function categories(): BelongsToMany
-    {
-        return $this->belongsToMany(PostCategory::class)->withPivot('post_category_id')->using(PostPostCategory::class);
+        return Attribute::make(
+            get: function () {
+                return Storage::disk(config('nova-blog.storage.disk', 'public'))
+                ->url($this->featured_image);
+            }
+        );
     }
 }
