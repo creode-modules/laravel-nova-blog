@@ -3,12 +3,7 @@
 namespace Creode\LaravelNovaBlog;
 
 use Creode\LaravelNovaBlog\Nova\Post;
-use Creode\LaravelNovaBlog\Nova\PostCategory;
-use Illuminate\Support\Facades\Blade;
 use Laravel\Nova\Nova;
-use Creode\LaravelNovaBlog\View\Components\ImageAndText;
-use Creode\LaravelNovaBlog\View\Components\ImagesSideBySide;
-use Creode\LaravelNovaBlog\View\Components\Text;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -20,7 +15,6 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
         parent::boot();
 
         $this->registerResources();
-        $this->registerComponents();
     }
 
     public function registerResources()
@@ -28,15 +22,6 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
         Post::$model = config('nova-blog.post_model', \Creode\LaravelNovaBlog\Entities\Post::class);
         Nova::resources([
             Post::class,
-        ]);
-    }
-
-    public function registerComponents()
-    {
-        Blade::components([
-            'ImageAndText' => ImageAndText::class,
-            'ImagesSideBySide' => ImagesSideBySide::class,
-            'text' => Text::class,
         ]);
     }
 
