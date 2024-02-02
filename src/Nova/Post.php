@@ -67,18 +67,19 @@ class Post extends Resource
                 ->required()
                 ->help(__('The meta description for the post. This will be used in search engine results.')),
 
-            Boolean::make('Featured Post', 'featured_post')
-                ->help(__('Determines if the post is featured on the listing page')),
-
-            PageBuilder::make('Body')
-                ->exclude(config('nova-blog.excluded_blocks')),
-
-            Textarea::make('Excerpt'),
-
             Image::make('Featured Image', 'featured_image')
                 ->disk(config('nova-blog.image_disk', 'public'))
                 ->path('blog')
                 ->prunable(),
+
+            Boolean::make('Featured Post', 'featured_post')
+                ->help(__('Determines if the post is featured on the listing page')),
+
+            Textarea::make('Excerpt'),
+
+            PageBuilder::make('Body')
+                ->exclude(config('nova-blog.excluded_blocks')),
+
         ];
     }
 
