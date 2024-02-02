@@ -13,9 +13,6 @@
 
 use Creode\LaravelNovaBlog\Http\Controllers\BlogController;
 
-Route::prefix('blog')->group(function () {
-    Route::get('/', [BlogController::class, 'index'])->name('blog');
-    Route::get('/{post:slug}', [BlogController::class, 'showPost'])->name('blog.post.show');
-
-    Route::get('/category/{postCategory:slug}', [BlogController::class, 'showCategory'])->name('blog.category.show');
+Route::prefix(config('nova-blog.route_prefix', 'blog'))->group(function () {
+    Route::get('{post:slug}', [BlogController::class, 'showPost'])->name('blog.post.show');
 });

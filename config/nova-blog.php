@@ -23,4 +23,14 @@ return [
     |
     */
     'post_model' => \Creode\LaravelNovaBlog\Entities\Post::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Route Prefix
+    |--------------------------------------------------------------------------
+    |
+    | Prefix used when defining the blog routes.
+    |
+    */
+    'route_prefix' => 'blog',
 ];
