@@ -14,5 +14,5 @@
 use Creode\LaravelNovaBlog\Http\Controllers\BlogController;
 
 Route::prefix(config('nova-blog.route_prefix', 'blog'))->group(function () {
-    Route::get('{post:slug}', [BlogController::class, 'showPost'])->name('blog.post.show');
+    Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post.show');
 });

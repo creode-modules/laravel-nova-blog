@@ -15,7 +15,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "creode/laravel-repository": "^1.0",
-        "creode/nova-page-builder": "^1.2",
+        "creode/nova-page-builder": "^1.3",
         "creode/nova-publishable": "^1.0",
         "laravel/nova": "^4.0",
         "spatie/laravel-package-tools": "^1.14.0"
@@ -31,7 +31,6 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Creode\\LaravelNovaBlog\\ToolServiceProvider",
                 "Creode\\LaravelNovaBlog\\LaravelNovaBlogServiceProvider"
             ]
         }

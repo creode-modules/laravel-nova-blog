@@ -2,23 +2,34 @@
 
 namespace Creode\LaravelNovaBlog\Entities;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use PawelMysior\Publishable\Publishable;
 use Spatie\Translatable\HasTranslations;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Creode\NovaPageBuilder\Traits\HasComponents;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 
 class Post extends Model
 {
-    use HasFlexible, HasTranslations, Publishable;
+    use HasFlexible, HasTranslations, Publishable, HasComponents;
 
-    protected $fillable = [];
+    protected $componentField = 'body';
+
+    protected $casts = [
+        'body' => FlexibleCast::class,
+    ];
 
     public $translatable = ['title'];
 
-    public function author(): BelongsTo
+    public function featuredImageUrl(): Attribute
     {
-        return $this->belongsTo(User::class);
+        return Attribute::make(
+            get: function () {
+                return Storage::disk(config('nova-blog.storage.disk', 'public'))
+                ->url($this->featured_image);
+            }
+        );
     }
 }

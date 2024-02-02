@@ -9,7 +9,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravelNovaBlogServiceProvider extends PackageServiceProvider
 {
-
     public function boot()
     {
         parent::boot();
@@ -30,7 +29,6 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-nova-blog')
             ->hasViews()
-            ->hasRoutes('web')
             ->hasConfigFile()
             ->hasMigrations(
                 [
@@ -44,6 +42,8 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
                     '2024_02_01_164553_remove_post_post_categories_table',
                     '2024_02_01_164655_remove_post_categories_tables',
                     '2024_02_02_150337_remove_author_field',
+                    '2024_02_02_155625_add_meta_description_field',
+                    '2024_02_02_163321_create_published_at_field',
                 ]
             )
             ->runsMigrations();

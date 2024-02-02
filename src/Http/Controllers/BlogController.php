@@ -4,7 +4,6 @@ namespace Creode\LaravelNovaBlog\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Routing\Controller;
-use Creode\LaravelNovaBlog\Entities\Post;
 use Creode\LaravelNovaBlog\Repositories\PostRepository;
 
 class BlogController extends Controller
@@ -24,8 +23,19 @@ class BlogController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function showPost(Post $post)
+    public function show(string $slug)
     {
-        return view('nova-blog::show', compact('post'));
+        $post = $this->postRepository
+            ->where('slug', $slug)
+            ->published()
+            ->first();
+
+        if (!$post) {
+            abort(404);
+        }
+
+        return view('nova-blog::show', [
+            'post' => $post
+        ]);
     }
 }

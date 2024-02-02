@@ -1,13 +1,11 @@
-@extends('blog::layouts.master')
+@extends('nova-blog::layouts.master')
 
 @section('content')
+    @if ($post->featured_image)
+        <img src="{{ $post->featured_image_url }}" alt="{{ __('Featured image for article {title}', ['{title}' => $post->title])}}">
+    @endif
 
-    <h1 class="text-7xl mb-10">{{ $post->title }} <small class="text-xl"> by {{ $post->author->name }}</small></h1>
-    <img src="{{ asset('storage').'/'.$post->featured_image }}" alt="">
-    <h5 class="my-5"><strong>Categories: </strong>{{ $post->categories->pluck('title')->implode(', ') }}</h5>
+    <h1 class="text-7xl mb-10">{{ $post->title }}</h1>
 
-    @foreach($post->flexible('body') as $block)
-        <x-dynamic-component :component="$block->name()" :$block></x-dynamic-component>
-    @endforeach
-
+    @include('page-builder::components', ['components' => $post->components])
 @endsection

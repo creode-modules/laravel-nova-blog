@@ -2,18 +2,18 @@
 
 namespace Creode\LaravelNovaBlog\Nova;
 
-use Creode\NovaPageBuilder\Nova\Fields\PageBuilder;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Resource;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Textarea;
+use Creode\NovaPublishable\Published;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Resource;
-use Whitecube\NovaFlexibleContent\Flexible;
+use Creode\NovaPublishable\Nova\PublishAction;
+use Creode\NovaPublishable\Nova\UnpublishAction;
+use Creode\NovaPageBuilder\Nova\Fields\PageBuilder;
 
 class Post extends Resource
 {
@@ -53,6 +53,8 @@ class Post extends Resource
         return [
             ID::make()->sortable(),
 
+            Published::make('Published', 'published_at'),
+
             Text::make('Title')
                 ->sortable()
                 ->rules('required', 'max:255'),
@@ -74,7 +76,7 @@ class Post extends Resource
             Textarea::make('Excerpt'),
 
             Image::make('Featured Image', 'featured_image')
-                ->disk('public')
+                ->disk(config('nova-blog.image_disk', 'public'))
                 ->path('blog')
                 ->prunable(),
         ];
@@ -121,6 +123,16 @@ class Post extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new PublishAction)
+                ->confirmText('Are you sure you want to publish these items?')
+                ->confirmButtonText('Publish')
+                ->cancelButtonText("Don't Publish"),
+
+            (new UnpublishAction)
+                ->confirmText('Are you sure you want to unpublish these items?')
+                ->confirmButtonText('Unpublish')
+                ->cancelButtonText("Don't Unpublish")
+        ];
     }
 }
