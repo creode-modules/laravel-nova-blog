@@ -1,6 +1,6 @@
 preset: package
 
-namespace: PackageName
+namespace: Creode\LaravelNovaBlog
 user-auth-model: App\Models\User
 
 paths:
@@ -15,13 +15,14 @@ migration:
   prefix: ''
 
 console:
-  namespace: PackageName\Console
+  namespace: Creode\LaravelNovaBlog\Console
 
 model:
-  namespace: PackageName\Models
+  namespace: Creode\LaravelNovaBlog\Entities
+  path: src/Entities
 
 provider:
-  namespace: PackageName\Providers
+  namespace: Creode\LaravelNovaBlog\Providers
 
 testing:
-  namespace: PackageName\Tests
+  namespace: Creode\LaravelNovaBlog\Tests
