@@ -65,6 +65,7 @@ class Post extends Resource
 
             Text::make('Meta Description')
                 ->required()
+                ->rules('required')
                 ->help(__('The meta description for the post. This will be used in search engine results.')),
 
             Image::make('Featured Image', 'featured_image')
