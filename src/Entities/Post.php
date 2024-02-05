@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use PawelMysior\Publishable\Publishable;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Builder;
 use Creode\NovaPageBuilder\Traits\HasComponents;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
@@ -44,6 +45,16 @@ class Post extends Model
      * @var string
      */
     protected $table = 'posts';
+
+    /**
+     * Query Scope to get all featured articles.
+     *
+     * @param Builder $query
+     */
+    public function scopeIsFeatured(Builder $query): void
+    {
+        $query->where('featured_post', true);
+    }
 
     /**
      * Allows the retrieval of the featured image URL.
