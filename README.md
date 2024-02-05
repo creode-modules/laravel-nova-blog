@@ -42,7 +42,7 @@ The default Blog model can be replaced to allow you to add new features to it wi
 // config/nova-blog.php
 return [
     ...
-    'model' => App\NovaBlog::class,
+    'post_model' => App\NovaBlog::class,
     ...
 ];
 ```
