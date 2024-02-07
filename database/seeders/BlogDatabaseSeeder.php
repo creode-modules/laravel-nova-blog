@@ -1,6 +1,6 @@
 <?php
 
-namespace Creode\LaravelNovaBlog\database\seeders;
+namespace Creode\LaravelNovaBlog\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +16,6 @@ class BlogDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        \Creode\LaravelNovaBlog\Entities\Post::factory(20)->create();
     }
 }

@@ -68,3 +68,10 @@ use Creode\LaravelNovaBlog\Repositories\BlogRepository;
 $blogRepository = new BlogRepository();
 $blogs = $blogRepository->all();
 ```
+
+### Seeding Blog Posts
+You can seed the blog posts using the `BlogDatabaseSeeder` class:
+
+```bash
+php artisan db:seed --class="Creode\LaravelNovaBlog\Database\Seeders\BlogDatabaseSeeder"
+```

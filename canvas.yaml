@@ -9,6 +9,7 @@ paths:
 
 factory:
   path: database/factories
+  namespace: Creode\LaravelNovaBlog\Database\Factories
 
 migration:
   path: database/migrations
