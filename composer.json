@@ -25,7 +25,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Creode\\LaravelNovaBlog\\": "src/"
+            "Creode\\LaravelNovaBlog\\": "src/",
+            "Creode\\LaravelNovaBlog\\Database\\Factories\\": "database/factories/",
+            "Creode\\LaravelNovaBlog\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "extra": {
