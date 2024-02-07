@@ -27,7 +27,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->foreignId('author_id')->references('id')->on('users');
+            $table->foreignId('author_id')
+                ->after('excerpt')
+                ->default(1)
+                ->references('id')
+                ->on('users');
         });
     }
 };
