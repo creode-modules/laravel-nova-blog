@@ -76,7 +76,7 @@ class Post extends Model
     {
         return Attribute::make(
             get: function () {
-                return Storage::disk(config('nova-blog.storage.disk', 'public'))
+                return Storage::disk(config('nova-blog.image_disk', 'public'))
                     ->url($this->featured_image);
             }
         );
