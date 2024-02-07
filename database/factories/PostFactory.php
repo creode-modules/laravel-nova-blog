@@ -38,7 +38,7 @@ class PostFactory extends Factory
             'body' => '',
             'excerpt' => $this->faker->sentence(),
             'featured_image' => $this->faker->image(
-                Storage::disk(config('nova-blog.image_disk', 'public'))->path('blog/'),
+                Storage::disk(config('nova-blog.image_disk', 'public'))->path(''),
                 640,
                 480,
                 null,
