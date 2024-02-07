@@ -9,12 +9,13 @@ use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Builder;
 use Creode\NovaPageBuilder\Traits\HasComponents;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 
 class Post extends Model
 {
-    use HasFlexible, HasTranslations, Publishable, HasComponents;
+    use HasFlexible, HasTranslations, Publishable, HasComponents, HasFactory;
 
     /**
      * Determine the field which will be used for Page Builder components.
@@ -45,6 +46,16 @@ class Post extends Model
      * @var string
      */
     protected $table = 'posts';
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<static>
+     */
+    protected static function newFactory()
+    {
+        return \Creode\LaravelNovaBlog\Database\Factories\PostFactory::new();
+    }
 
     /**
      * Query Scope to get all featured articles.
