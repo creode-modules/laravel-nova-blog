@@ -52,5 +52,5 @@ return [
     | and updating a resource.
     |
     */
-    'traffic_cop' => true
+    'traffic_cop' => true,
 ];
