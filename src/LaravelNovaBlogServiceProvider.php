@@ -19,6 +19,7 @@ class LaravelNovaBlogServiceProvider extends PackageServiceProvider
     public function registerResources()
     {
         Post::$model = config('nova-blog.post_model', \Creode\LaravelNovaBlog\Entities\Post::class);
+        Post::$trafficCop = config('nova-blog.traffic_cop');
         Nova::resources([
             Post::class,
         ]);
