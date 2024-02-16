@@ -42,4 +42,15 @@ return [
     | The disk on which to store images on.
     */
     'image_disk' => 'public',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Traffic Cop
+    |--------------------------------------------------------------------------
+    |
+    | Indicates whether Nova should check for modifications between viewing
+    | and updating a resource.
+    |
+    */
+    'traffic_cop' => true
 ];
