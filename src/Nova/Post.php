@@ -43,6 +43,21 @@ class Post extends Resource
     public static $group = 'Blog';
 
     /**
+     * {@inheritdoc}
+     */
+    public static function label()
+    {
+        return 'Post';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function uriKey() {
+        return 'posts';
+    }
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
