@@ -17,7 +17,7 @@
         "creode/laravel-repository": "^1.0",
         "creode/nova-page-builder": "^1.3",
         "creode/nova-publishable": "^1.0",
-        "laravel/nova": "^4.0",
+        "laravel/nova": "^4.0|^5.0",
         "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
